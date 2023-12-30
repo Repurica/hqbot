@@ -1,3 +1,6 @@
-GENDER, PHOTO, LOCATION, BIO = range(4)
+import os
+from dotenv import load_dotenv
 
-print(GENDER, PHOTO, LOCATION, BIO)
+load_dotenv()
+
+print(os.getenv("BOT_TOKEN"))

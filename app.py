@@ -8,11 +8,11 @@ from supabase import create_client, Client
 # url: str = os.environ.get("https://cwxkwruekonjpjqvpvyr.supabase.co")
 # key: str = os.environ.get("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN3eGt3cnVla29uanBqcXZwdnlyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDM4NDMxODgsImV4cCI6MjAxOTQxOTE4OH0.fBWSlCajKKgQ3OrEr9M_hG_wFqzU6_Ajd7C_0NBrCG4")
 
-url: str = "https://cwxkwruekonjpjqvpvyr.supabase.co"
-key: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN3eGt3cnVla29uanBqcXZwdnlyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDM4NDMxODgsImV4cCI6MjAxOTQxOTE4OH0.fBWSlCajKKgQ3OrEr9M_hG_wFqzU6_Ajd7C_0NBrCG4"
+url: str = os.getenv("SUPABASE_URL")
+key: str = os.getenv("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
-bot = Bot(token="6932402333:AAHy4o5FG-tJoKDyfQvAJKWy23ThLowAlc4")
+bot = Bot(token=os.getenv("BOT_TOKEN"))
 
 
 chat_list={}
