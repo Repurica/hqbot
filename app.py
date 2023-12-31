@@ -15,7 +15,7 @@ key: str = os.getenv("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
 bot = Bot(token=os.getenv("BOT_TOKEN"))
-
+print(os.getenv("BOT_TOKEN"))
 
 chat_list={}
 
@@ -25,7 +25,14 @@ chat_list={}
 # )
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(chat_id=update.effective_chat.id, text="I'm a bot, please talk to me!")
+    await context.bot.send_message(chat_id=update.effective_chat.id, parse_mode='HTML', 
+                                   text=
+"Welcome to smuhq bot! This bot is designed to better facilit HQ!" 
+"\n\nAvailable Commands:\n\n"  
+"<strong>chat</strong>\n" 
+"/chat - join a virtual chat group\n"
+"any message - broadcast message to those who are in chat\n"
+"/exit - exit chat group" )
 
 async def new_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.message.chat_id
@@ -112,7 +119,7 @@ async def exit(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     return ConversationHandler.END
 
 if __name__ == '__main__':
-    application = ApplicationBuilder().token('6932402333:AAHy4o5FG-tJoKDyfQvAJKWy23ThLowAlc4').build()
+    application = ApplicationBuilder().token(os.getenv("BOT_TOKEN")).build()
     
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
