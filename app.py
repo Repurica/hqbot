@@ -32,6 +32,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 "<strong>chat</strong>\n" 
 "/chat - join a virtual chat group\n"
 "any message - broadcast message to those who are in chat\n"
+"/in_chat - list all users in chat\n"
 "/exit - exit chat group" )
 
 async def new_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -90,9 +91,10 @@ async def chat(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def text(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     global chat_list
     global bot
+    
     for username, chat_id in chat_list.items():
         if chat_id != update.message.chat_id:
-            await bot.send_message(chat_id=chat_id, text="from @"+username+":\t"+update.message.text)
+            await bot.send_message(chat_id=chat_id, text="from @"+update.message.from_user.username+":\t"+update.message.text)
 
     
     return 0
@@ -113,7 +115,7 @@ async def exit(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         
     for username, chat_id in chat_list.items():
         if chat_id != update.message.chat_id:
-            await bot.send_message(chat_id=chat_id, text="@"+username+" left the chat")
+            await bot.send_message(chat_id=chat_id, text="@"+update.message.from_user.username+" left the chat")
 
     
     return ConversationHandler.END
