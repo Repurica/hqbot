@@ -11,7 +11,7 @@ import os
 # supabase: Client = create_client(url, key)
 
 bot = Bot(token=os.getenv("BOT_TOKEN"))
-print(os.getenv("BOT_TOKEN"))
+
 
 chat_list={}
 
