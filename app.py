@@ -3,16 +3,12 @@ from telegram import Update, Bot
 from telegram.ext import ConversationHandler, filters, ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler
 
 import os
-from supabase import create_client, Client
-from dotenv import load_dotenv
+# from supabase import create_client, Client
 
-load_dotenv()
-# url: str = os.environ.get("https://cwxkwruekonjpjqvpvyr.supabase.co")
-# key: str = os.environ.get("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN3eGt3cnVla29uanBqcXZwdnlyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDM4NDMxODgsImV4cCI6MjAxOTQxOTE4OH0.fBWSlCajKKgQ3OrEr9M_hG_wFqzU6_Ajd7C_0NBrCG4")
 
-url: str = os.getenv("SUPABASE_URL")
-key: str = os.getenv("SUPABASE_KEY")
-supabase: Client = create_client(url, key)
+# url: str = os.getenv("SUPABASE_URL")
+# key: str = os.getenv("SUPABASE_KEY")
+# supabase: Client = create_client(url, key)
 
 bot = Bot(token=os.getenv("BOT_TOKEN"))
 print(os.getenv("BOT_TOKEN"))
@@ -35,16 +31,16 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 "/in_chat - list all users in chat\n"
 "/exit - exit chat group" )
 
-async def new_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    chat_id = update.message.chat_id
-    user = update.message.from_user.username
-    data,count = supabase.table('chats').select('chat_id').eq('chat_id', chat_id).execute()
+# async def new_member(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # chat_id = update.message.chat_id
+    # user = update.message.from_user.username
+    # data,count = supabase.table('chats').select('chat_id').eq('chat_id', chat_id).execute()
     
-    if (data!=[]):
-        await context.bot.send_message(chat_id=update.effective_chat.id, text="user already exist!")
-    else:
-        supabase.table('chats').insert({"chat_id": chat_id,"userhandle":user}).execute()
-        await context.bot.send_message(chat_id=update.effective_chat.id, text="created profile!")
+    # if (data!=[]):
+    #     await context.bot.send_message(chat_id=update.effective_chat.id, text="user already exist!")
+    # else:
+    #     supabase.table('chats').insert({"chat_id": chat_id,"userhandle":user}).execute()
+    #     await context.bot.send_message(chat_id=update.effective_chat.id, text="created profile!")
 
 
 
@@ -126,8 +122,8 @@ if __name__ == '__main__':
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
     
-    new_member_handler = CommandHandler('new', new_member)
-    application.add_handler(new_member_handler)
+    # new_member_handler = CommandHandler('new', new_member)
+    # application.add_handler(new_member_handler)
     
     in_chat_handler = CommandHandler('in_chat', in_chat)
     application.add_handler(in_chat_handler)    
