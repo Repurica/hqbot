@@ -1,3 +1,6 @@
 .venv
 .vscode
 .env
+lib
+test.py
+HQ-KEY.ppk
