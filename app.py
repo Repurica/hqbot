@@ -1,20 +1,18 @@
 import logging
 from telegram import Update, Bot
 from telegram.ext import ConversationHandler, filters, ApplicationBuilder, ContextTypes, CommandHandler, MessageHandler
-
+from dotenv import load_dotenv
 import os
 # from supabase import create_client, Client
 
 
+load_dotenv()
 # url: str = os.getenv("SUPABASE_URL")
 # key: str = os.getenv("SUPABASE_KEY")
 # supabase: Client = create_client(url, key)
 
+print(os.getenv("BOT_TOKEN"))
 bot = Bot(token=os.getenv("BOT_TOKEN"))
-<<<<<<< HEAD
-=======
-
->>>>>>> 176f91c276d248563bd209d0dabb050b5c020e99
 
 chat_list={}
 
@@ -22,6 +20,8 @@ chat_list={}
 #     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
 #     level=logging.INFO
 # )
+
+
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.effective_chat.id, parse_mode='HTML', 
