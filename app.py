@@ -29,7 +29,7 @@ bot = Bot(token=os.getenv("BOT_TOKEN"))
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await context.bot.send_message(chat_id=update.effective_chat.id, parse_mode='HTML', 
                                    text=
-"Welcome to smuhq bot! This bot is designed to better facilit HQ!" 
+"Welcome to smuhq bot! This bot is designed to better facilitate HQ!" 
 "\n\nAvailable Commands:\n\n"  
 "<strong>chat</strong>\n" 
 "/chat - join a virtual chat group\n"
