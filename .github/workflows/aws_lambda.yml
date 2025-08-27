@@ -1,0 +1,66 @@
+  name: AWS Lambda Deploy Action
+  # You may pin to the exact commit or the version.
+  # uses: aws-actions/aws-lambda-deploy@29ea35c124579506cf0475e20df36198eb670d89
+  uses: aws-actions/aws-lambda-deploy@v1.1.0
+  with:
+    # Name of the Lambda function.
+    function-name: hqbot
+    # The package type of the Lambda function. Set to "Image" for container image functions, defaults to "Zip" for .zip file functions.
+    package-type: # optional, default is Zip
+    # The URI of the container image in Amazon ECR. Required when package-type is "Image".
+    image-uri: # optional
+    # The path to a directory of code artifacts to zip and deploy to Lambda. Required when package-type is "Zip".
+    code-artifacts-dir: # optional
+    # The name of the method within your code that Lambda calls to run your function. Required when package-type is "Zip".
+    handler: # optional, default is index.handler
+    # The identifier of the runtime. Required when package-type is "Zip".
+    runtime: # optional, default is nodejs20.x
+    # S3 bucket name to use for Lambda deployment package. If provided, S3 deployment method will be used instead of direct upload.
+    s3-bucket: # optional
+    # S3 key for the Lambda deployment package in the bucket. If not provided, a key will be auto-generated using the format: lambda-deployments/{function-name}/{timestamp}-{commit-hash}.zip.
+    s3-key: # optional
+    # Set to true to publish a new version of the function after updating the code.
+    publish: # optional
+    # Set true to validate the request parameters and access permissions without modifying the function code. Applicable for updating function code only. Creating and updating function configuration will be skipped since they do not support dry run.
+    dry-run: # optional, default is false
+    # Update the function only if the revision ID matches the ID that is specified.
+    revision-id: # optional
+    # The instruction set architecture that the function supports.
+    architectures: # optional
+    # The ARN of the Key Management Service (KMS) customer managed key that is used to encrypt your functions .zip deployment package.
+    source-kms-key-arn: # optional
+    # The Amazon Resource Name (ARN) of the functions execution role. Required when creating a new function.
+    role: # optional
+    # A description of the function.
+    function-description: # optional
+    # The amount of memory available to the function at runtime.
+    memory-size: # optional
+    # The amount of time (in seconds) that Lambda allows a function to run before stopping it.
+    timeout: # optional
+    # For network connectivity to Amazon Web Services resources in a VPC, specify a list of security groups and subnets in the VPC.
+    vpc-config: # optional
+    # Environment variables as a JSON string
+    environment: # optional
+    # Specifies the queue or topic where Lambda sends asynchronous events when they fail processing.
+    dead-letter-config: # optional
+    # The ARN of the Key Management Service (KMS) customer managed key
+    kms-key-arn: # optional
+    # Set Mode to Active to sample and trace a subset of incoming requests with X-Ray.
+    tracing-config: # optional
+    # A list of function layers to add to the functions execution environment.
+    layers: # optional
+    # Connection settings for an Amazon EFS file system.
+    file-system-configs: # optional
+    # Configuration for the Lambda functions container image.
+    image-config: # optional
+    # The size of the functions /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10,240 MB.
+    ephemeral-storage: # optional
+    # The functions SnapStart setting.
+    snap-start: # optional
+    # The Amazon CloudWatch Logs configuration settings for the function.
+    logging-config: # optional
+    # The ARN of a code-signing configuration to use on this function.
+    code-signing-config-arn: # optional
+    # Tags to apply to the function as a JSON string (e.g. {"Environment":"Production","Team":"DevOps"})
+    tags: # optional
+          
