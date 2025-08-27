@@ -63,6 +63,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 if __name__ == '__main__':
     application = ApplicationBuilder().token(os.getenv("BOT_TOKEN")).build()
+    print("HQ BOT RUNNING!")
     
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
@@ -81,6 +82,7 @@ if __name__ == '__main__':
         fallbacks=[CommandHandler("exit", exit)]
     )
     application.add_handler(chat_handler)
-    
     # application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
     application.run_polling()
+    print("HQ BOT RUNNING!")
+    
