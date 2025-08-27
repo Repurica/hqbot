@@ -26,7 +26,7 @@ jobs:
     - name: Package application
       run: |
         mkdir package
-        cp -r . package/
+        rsync -av --exclude=package ./ package/
         cd package
         zip -r ../lambda_function.zip .
 
