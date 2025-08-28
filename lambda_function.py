@@ -2,7 +2,6 @@ import os
 import json
 import requests
 from dotenv import load_dotenv
-import functions.command as command
 import functions.chat as chat
 # Only load .env in local development
 if os.environ.get('AWS_LAMBDA_FUNCTION_NAME') is None:
