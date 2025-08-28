@@ -175,6 +175,4 @@ class Chat:
             requests.post(url, json={"chat_id": cid, "video_note": file_id})
 
         return
-            # if cid != chat_id:
-                self.send_message(cid, text=f"@{username}{icon} sent a tele bubble.")
-                requests.post(url, json=data)
+
