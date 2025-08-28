@@ -35,7 +35,7 @@ def lambda_handler(event, context):
         return {"statusCode": 200, "body": "No chat_id"}
 
     if 'text' in message:
-        
+
         text = message.get("text", "")
 
         if text.startswith("/start"):
@@ -53,4 +53,6 @@ def lambda_handler(event, context):
         file_id = message['photo'][-1]['file_id']
         caption = message.get('caption', '')
         virtual_chat.forward_photo(chat_id, username, file_id, caption)
+        
+
     return {"statusCode": 200, "body": "ok"}
