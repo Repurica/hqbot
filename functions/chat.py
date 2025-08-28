@@ -53,7 +53,7 @@ class Chat:
         self.icons.remove(icon)
         return icon
 
-    def chat(self, chat_id, username, text) -> None:
+    def chat(self, chat_id, username) -> None:
         if username in self.in_chat_users:
             self.send_message(chat_id, "You are already in chat.")
             return 0
@@ -127,6 +127,28 @@ class Chat:
         data["caption"] = f"@{username}{icon}"
         if caption:
             data["caption"] += f": {caption}"
-        response = requests.post(url, json=data)
+        for uname, (cid, icn) in self.in_chat_users.items():
+            # if cid != chat_id:
+                requests.post(url, json=data)
         
-        return response
+        return
+
+    def forward_sticker(self, chat_id, username, file_id, caption=None):
+        if username not in self.in_chat_users:
+            self.send_message(chat_id, "You are not in chat. Use /chat to join the chat.")
+            return
+
+        chat_id, icon = self.in_chat_users.get(username)
+
+        url = f"{self.telegram_api_url}/sendSticker"
+        data = {
+            "chat_id": chat_id,
+            "sticker": file_id
+        }
+        data["caption"] = f"@{username}{icon}"
+        if caption:
+            data["caption"] += f": {caption}"
+        for uname, (cid, icn) in self.in_chat_users.items():
+            # if cid != chat_id:
+                requests.post(url, json=data)
+        return 

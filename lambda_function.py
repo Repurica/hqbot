@@ -41,7 +41,7 @@ def lambda_handler(event, context):
         if text.startswith("/start"):
             virtual_chat.start(chat_id)
         elif text.startswith("/chat"):
-            virtual_chat.chat(chat_id, username, text)
+            virtual_chat.chat(chat_id, username)
         elif text.startswith("/in_chat"):
             virtual_chat.in_chat(chat_id)
         elif text.startswith("/exit"):
@@ -53,6 +53,9 @@ def lambda_handler(event, context):
         file_id = message['photo'][-1]['file_id']
         caption = message.get('caption', '')
         virtual_chat.forward_photo(chat_id, username, file_id, caption)
-        
+    elif 'sticker' in message:
+        file_id = message['sticker']['file_id']
+        caption = message.get('caption', '')
+        virtual_chat.forward_sticker(chat_id, username, file_id, caption)
 
     return {"statusCode": 200, "body": "ok"}
