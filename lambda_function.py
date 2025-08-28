@@ -43,7 +43,7 @@ def lambda_handler(event, context):
         elif text.startswith("/chat"):
             virtual_chat.chat(chat_id, username, text)
         elif text.startswith("/in_chat"):
-            virtual_chat.in_chat(chat_id, text)
+            virtual_chat.in_chat(chat_id)
         elif text.startswith("/exit"):
             virtual_chat.exit(chat_id, username)
     

@@ -37,7 +37,7 @@ class Chat:
 
         
         
-    def in_chat(self, chat_id, text) -> None:
+    def in_chat(self, chat_id) -> None:
         text = "Currently in chat:\n\n"
         for username, (cid, icon) in self.in_chat_users.items():
             text += f"@{username} {icon}\n"
