@@ -68,4 +68,9 @@ def lambda_handler(event, context):
         caption = message.get('caption', '')
         virtual_chat.forward_video(chat_id, username, file_id, caption)
 
+    elif 'document' in message:
+        file_id = message['document']['file_id']
+        caption = message.get('caption', '')
+        virtual_chat.forward_file(chat_id, username, file_id, caption)
+
     return {"statusCode": 200, "body": "ok"}
