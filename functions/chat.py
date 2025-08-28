@@ -34,6 +34,9 @@ class Chat:
             payload["parse_mode"] = parse_mode
         requests.post(url, json=payload)
         
+
+        
+        
     def in_chat(self, chat_id, text) -> None:
         text = "Currently in chat:\n\n"
         for username, (cid, icon) in self.in_chat_users.items():
@@ -108,8 +111,11 @@ class Chat:
         )
 
 
-    def forward_photo(self, username, file_id, caption=None):
-        chat_id, icon = self.in_chat_users.get(username)
+    def forward_photo(self, chat_id, username, file_id, caption=None):
+        self.send_message(
+            chat_id,
+            f"{self.in_chat_users}"
+        )
         
         url = f"{self.telegram_api_url}/sendPhoto"
         data = {
@@ -117,7 +123,6 @@ class Chat:
             "photo": file_id
         }
         data["caption"] = f"{username}{icon} {caption}"
-        for uname, (cid, icon) in self.in_chat_users.items():
-            response = requests.post(url, json=data)
+        response = requests.post(url, json=data)
         
         return response
