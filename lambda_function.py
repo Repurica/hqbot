@@ -73,4 +73,9 @@ def lambda_handler(event, context):
         caption = message.get('caption', '')
         virtual_chat.forward_file(chat_id, username, file_id, caption)
 
+    elif 'voice' in message:
+        file_id = message['voice']['file_id']
+        caption = message.get('caption', '')
+        virtual_chat.forward_voice(chat_id, username, file_id, caption)
+
     return {"statusCode": 200, "body": "ok"}
