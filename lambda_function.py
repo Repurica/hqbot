@@ -54,7 +54,7 @@ def lambda_handler(event, context):
             parse_mode="HTML"
         )
     else:
-        virtual_chat.add_message(message.from_user.username, text)
+        virtual_chat.add_message(message, text)
         virtual_chat.send_message(chat_id)
         # send_message(chat_id, {text})
         
