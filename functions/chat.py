@@ -152,4 +152,24 @@ class Chat:
             # if cid != chat_id:
                 self.send_message(cid, text=f"@{username}{icon} sent a sticker.")
                 requests.post(url, json=data)
-        return 
+        return
+
+    def forward_tele_bubble(self, chat_id, username, file_id, caption=None):
+        if username not in self.in_chat_users:
+            self.send_message(chat_id, "You are not in chat. Use /chat to join the chat.")
+            return
+
+        chat_id, icon = self.in_chat_users.get(username)
+
+        url = f"{self.telegram_api_url}/sendAnimation"
+        data = {
+            "chat_id": chat_id,
+            "animation": file_id
+        }
+        data["caption"] = f"@{username}{icon}"
+        if caption:
+            data["caption"] += f": {caption}"
+        for uname, (cid, icn) in self.in_chat_users.items():
+            # if cid != chat_id:
+                self.send_message(cid, text=f"@{username}{icon} sent a tele bubble.")
+                requests.post(url, json=data)

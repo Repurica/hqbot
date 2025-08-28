@@ -57,5 +57,8 @@ def lambda_handler(event, context):
         file_id = message['sticker']['file_id']
         caption = message.get('caption', '')
         virtual_chat.forward_sticker(chat_id, username, file_id, caption)
-
+    elif 'animation' in message:
+        file_id = message['animation']['file_id']
+        caption = message.get('caption', '')
+        virtual_chat.forward_tele_bubble(chat_id, username, file_id, caption)
     return {"statusCode": 200, "body": "ok"}
