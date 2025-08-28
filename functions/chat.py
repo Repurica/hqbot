@@ -63,21 +63,22 @@ class Chat:
         self.send_message(chat_id, text)
         return 0
 
-    # def exit(self, update, context) -> int:
-    #     """Exits and ends the conversation."""
-    #     username = update.message.from_user.username
-    #     chat_id = update.message.chat_id
+    def exit(self, chat_id, username) -> int:
 
-    #     self.send_message(chat_id, parse_mode=None)
 
-    #     if username in self.in_chat_users:
-    #         del self.in_chat_users[username]
+        text = "You have exited the chat."
+        self.send_message(chat_id, text, parse_mode=None)
 
-    #     for uname, (cid, icon) in self.in_chat_users.items():
-    #         if cid != chat_id:
-    #             self.send_message(cid, parse_mode=None)
+        self.icons.append(self.in_chat_users[username][1])
+        if username in self.in_chat_users:
+            del self.in_chat_users[username]
 
-    #     return 0
+        for uname, (cid, icon) in self.in_chat_users.items():
+            if cid != chat_id:
+                text = f"@{username} {icon} exited the chat."
+                self.send_message(cid, text)
+
+        return 0
     
     def normal_message(self, chat_id, username, text) -> None:
         if username not in self.in_chat_users:
