@@ -5,7 +5,7 @@ from telegram.ext import ConversationHandler, ContextTypes
 from dotenv import load_dotenv
 import random
 load_dotenv()
-bot = Bot(token=os.getenv("BOT_TOKEN"))
+bot_token = os.environ.get("BOT_TOKEN")
 # above are compulsory imports
 
 chat_list = {}
