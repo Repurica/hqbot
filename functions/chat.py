@@ -161,15 +161,20 @@ class Chat:
 
         chat_id, icon = self.in_chat_users.get(username)
 
-        url = f"{self.telegram_api_url}/sendAnimation"
-        data = {
-            "chat_id": chat_id,
-            "animation": file_id
-        }
-        data["caption"] = f"@{username}{icon}"
+        url = f"{self.telegram_api_url}/sendVideoNote"
+        # sendVideoNote uses the "video_note" field
+        # Telegram's sendVideoNote doesn't support captions, so send a separate text announcement
+        announce = f"@{username}{icon}"
         if caption:
-            data["caption"] += f": {caption}"
+            announce += f": {caption}"
+
         for uname, (cid, icn) in self.in_chat_users.items():
+            # announce to each user
+            self.send_message(cid, text=announce)
+            # send the actual video note to each user
+            requests.post(url, json={"chat_id": cid, "video_note": file_id})
+
+        return
             # if cid != chat_id:
                 self.send_message(cid, text=f"@{username}{icon} sent a tele bubble.")
                 requests.post(url, json=data)
