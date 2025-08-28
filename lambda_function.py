@@ -78,9 +78,5 @@ def lambda_handler(event, context):
         caption = message.get('caption', '')
         virtual_chat.forward_voice(chat_id, username, file_id, caption)
 
-    elif 'poll' in message:
-        question = message['poll']['question']
-        options = [option['text'] for option in message['poll']['options']]
-        virtual_chat.forward_poll(chat_id, username, question, options)
 
     return {"statusCode": 200, "body": "ok"}
