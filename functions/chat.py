@@ -51,16 +51,16 @@ class Chat:
         return icon
 
     async def chat(self, chat_id, username, text) -> None:
-        icon = self.get_user_icon(username)
+        icon = self.get_user_icon()
         self.in_chat_users[username] = (chat_id, icon)
         text = "You are in chat now! Currently in chat:\n\n"
 
         for uname, (cid, icn) in self.in_chat_users.items():
             text += f"@{uname} {icn}\n"
             if cid != chat_id:
-                self.send_message(cid, parse_mode=None)
+                self.send_message(cid, text=f"@{username} {icon} joined the chat")
 
-        self.send_message(chat_id, parse_mode=None)
+        self.send_message(chat_id, text)
         return 0
 
     # async def exit(self, update, context) -> int:
@@ -89,5 +89,6 @@ class Chat:
             "/chat - join a virtual chat group\n"
             "any message - broadcast message to those who are in chat\n"
             "/in_chat - list all users in chat\n"
-            "/exit - exit chat group"
+            "/exit - exit chat group",
+            parse_mode="HTML"
         )
