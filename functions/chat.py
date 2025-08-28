@@ -239,3 +239,23 @@ class Chat:
                 requests.post(url, json=data)
 
         return
+
+    def forward_poll(self, chat_id, username, question, options):
+        if username not in self.in_chat_users:
+            self.send_message(chat_id, "You are not in chat. Use /chat to join the chat.")
+            return
+
+        chat_id, icon = self.in_chat_users.get(username)
+
+        url = f"{self.telegram_api_url}/sendPoll"
+        data = {
+            "chat_id": chat_id,
+            "question": question,
+            "options": options
+        }
+        data["caption"] = f"@{username}{icon}"
+        for uname, (cid, icn) in self.in_chat_users.items():
+            if cid != chat_id:
+                requests.post(url, json=data)
+
+        return
