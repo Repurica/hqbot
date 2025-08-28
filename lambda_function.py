@@ -21,6 +21,12 @@ def send_message(chat_id, text, parse_mode=None):
         payload["parse_mode"] = parse_mode
     requests.post(url, json=payload)
 
+
+
+
+
+
+
 def lambda_handler(event, context):
     body = event.get("body")
     if body is None:
