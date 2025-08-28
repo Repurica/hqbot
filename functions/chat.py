@@ -89,6 +89,5 @@ class Chat:
             "/chat - join a virtual chat group\n"
             "any message - broadcast message to those who are in chat\n"
             "/in_chat - list all users in chat\n"
-            "/exit - exit chat group",
-            parse_mode="HTML"
+            "/exit - exit chat group"
         )
