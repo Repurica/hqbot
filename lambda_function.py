@@ -44,9 +44,7 @@ def lambda_handler(event, context):
     elif text.startswith("/exit"):
         virtual_chat.exit(chat_id, text)
     
-        # virtual_chat.add_message(message, text)
-        # virtual_chat.send_message(chat_id)
-        # send_message(chat_id, {text})
-        
+    else:
+        virtual_chat.normal_message(chat_id, username, text)
 
     return {"statusCode": 200, "body": "ok"}

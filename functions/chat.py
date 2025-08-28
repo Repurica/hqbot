@@ -79,6 +79,14 @@ class Chat:
 
     #     return 0
     
+    def normal_message(self, chat_id, username, text) -> None:
+        if username not in self.in_chat_users:
+            self.send_message(chat_id, "You are not in chat. Use /chat to join the chat.")
+            return
+
+        for uname, (cid, icon) in self.in_chat_users.items():
+            if cid != chat_id:
+                self.send_message(cid, text=f"@{username} {icon}:\n\n {text}")
     
     def start(self, chat_id):
         self.send_message(
