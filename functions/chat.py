@@ -95,8 +95,8 @@ class Chat:
             return
         chat_id, icon = self.in_chat_users.get(username)
         for uname, (cid, icn) in self.in_chat_users.items():
-            # if cid != chat_id:
-            self.send_message(cid, text=f"@{username} {icon}:\n\n {text}")
+            if cid != chat_id:
+                self.send_message(cid, text=f"@{username} {icon}:\n\n {text}")
     
     def start(self, chat_id):
         self.send_message(
@@ -128,7 +128,7 @@ class Chat:
         if caption:
             data["caption"] += f": {caption}"
         for uname, (cid, icn) in self.in_chat_users.items():
-            # if cid != chat_id:
+            if cid != chat_id:
                 requests.post(url, json=data)
         
         return
@@ -149,7 +149,7 @@ class Chat:
         if caption:
             data["caption"] += f": {caption}"
         for uname, (cid, icn) in self.in_chat_users.items():
-            # if cid != chat_id:
+            if cid != chat_id:
                 self.send_message(cid, text=f"@{username}{icon} sent a sticker.")
                 requests.post(url, json=data)
         return
@@ -169,10 +169,11 @@ class Chat:
             announce += f": {caption}"
 
         for uname, (cid, icn) in self.in_chat_users.items():
-            # announce to each user
-            self.send_message(cid, text=announce)
-            # send the actual video note to each user
-            requests.post(url, json={"chat_id": cid, "video_note": file_id})
+            if cid != chat_id:
+                # announce to each user
+                self.send_message(cid, text=announce)
+                # send the actual video note to each user
+                requests.post(url, json={"chat_id": cid, "video_note": file_id})
 
         return
 

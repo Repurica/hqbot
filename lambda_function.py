@@ -29,7 +29,8 @@ def lambda_handler(event, context):
     message = update.get("message", {})
     chat_id = message.get("chat", {}).get("id")
     username = message.get("from", {}).get("username")
-    virtual_chat.send_message(chat_id, message)
+    
+    # virtual_chat.send_message(chat_id, message)
 
     if not chat_id:
         return {"statusCode": 200, "body": "No chat_id"}
