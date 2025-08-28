@@ -72,14 +72,15 @@ class Chat:
 
 
     def exit(self, chat_id, username) -> int:
-
+        if username not in self.in_chat_users:
+            self.send_message(chat_id, "You are not in chat.")
+            return -1
 
         text = "You have exited the chat."
         self.send_message(chat_id, text, parse_mode=None)
 
         self.icons.append(self.in_chat_users[username][1])
-        if username in self.in_chat_users:
-            del self.in_chat_users[username]
+        del self.in_chat_users[username]
 
         for uname, (cid, icon) in self.in_chat_users.items():
             if cid != chat_id:
