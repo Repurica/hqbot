@@ -91,8 +91,8 @@ class Chat:
             return
 
         for uname, (cid, icon) in self.in_chat_users.items():
-            if cid != chat_id:
-                self.send_message(cid, text=f"@{username} {icon}:\n\n {text}")
+            # if cid != chat_id:
+            self.send_message(cid, text=f"@{username} {icon}:\n\n {text}")
     
     def start(self, chat_id):
         self.send_message(
