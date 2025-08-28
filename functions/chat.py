@@ -51,6 +51,10 @@ class Chat:
         return icon
 
     def chat(self, chat_id, username, text) -> None:
+        if username in self.in_chat_users:
+            self.send_message(chat_id, "You are already in chat.")
+            return 0
+
         icon = self.get_user_icon()
         self.in_chat_users[username] = (chat_id, icon)
         text = "You are in chat now! Currently in chat:\n\n"
@@ -62,6 +66,7 @@ class Chat:
 
         self.send_message(chat_id, text)
         return 0
+
 
     def exit(self, chat_id, username) -> int:
 
