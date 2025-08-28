@@ -35,7 +35,7 @@ def lambda_handler(event, context):
         return {"statusCode": 200, "body": "No chat_id"}
 
     if 'text' in message:
-
+        
         text = message.get("text", "")
 
         if text.startswith("/start"):
