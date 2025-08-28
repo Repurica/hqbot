@@ -109,15 +109,15 @@ class Chat:
 
 
     def forward_photo(self, chat_id, file_id, caption=None):
+        username, icon = self.in_chat_users.get(chat_id)
         
         url = f"{self.telegram_api_url}/sendPhoto"
         data = {
             "chat_id": chat_id,
             "photo": file_id
         }
-        if caption:
-            data["caption"] = f"Forwarded photo: {caption}"
-        
+        data["caption"] = f"{username}{icon} {caption}"
+
         response = requests.post(url, json=data)
         
         return response
