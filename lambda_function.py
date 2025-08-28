@@ -52,5 +52,5 @@ def lambda_handler(event, context):
     elif 'photo' in message:
         file_id = message['photo'][-1]['file_id']
         caption = message.get('caption', '')
-        virtual_chat.forward_photo(chat_id, file_id, caption)
+        virtual_chat.forward_photo(username, file_id, caption)
     return {"statusCode": 200, "body": "ok"}
