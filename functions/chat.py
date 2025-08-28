@@ -23,12 +23,12 @@ class Chat:
     def clear(self):
         self.messages = []
     
-    def send_message(self,chat_id, parse_mode=None):
+    def send_message(self,chat_id, text, parse_mode=None):
         url = f"{self.telegram_api_url}/sendMessage"
 
         payload = {
             "chat_id": chat_id,
-            "text": "\n".join([f"{msg['user']}: {msg['message']}" for msg in self.messages]),
+            "text": text
         }
         if parse_mode:
             payload["parse_mode"] = parse_mode
