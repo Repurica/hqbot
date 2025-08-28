@@ -193,7 +193,7 @@ class Chat:
         if caption:
             data["caption"] += f": {caption}"
         for uname, (cid, icn) in self.in_chat_users.items():
-            # if cid != chat_id:
+            if cid != chat_id:
                 requests.post(url, json=data)
 
         return
