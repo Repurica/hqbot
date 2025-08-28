@@ -2,8 +2,8 @@ import os
 import json
 import requests
 from dotenv import load_dotenv
-
-
+import functions.command as command
+import functions.chat as chat
 # Only load .env in local development
 if os.environ.get('AWS_LAMBDA_FUNCTION_NAME') is None:
     load_dotenv()
@@ -13,6 +13,7 @@ TELEGRAM_API_URL = f"https://api.telegram.org/bot{bot_token}"
 
 def send_message(chat_id, text, parse_mode=None):
     url = f"{TELEGRAM_API_URL}/sendMessage"
+
     payload = {
         "chat_id": chat_id,
         "text": text,
@@ -23,7 +24,7 @@ def send_message(chat_id, text, parse_mode=None):
 
 
 
-
+virtual_chat = chat.Chat(TELEGRAM_API_URL)
 
 
 
@@ -53,6 +54,9 @@ def lambda_handler(event, context):
             parse_mode="HTML"
         )
     else:
-        send_message(chat_id, f"You said: {text}")
+        virtual_chat.add_message(message.from_user.username, text)
+        virtual_chat.send_message(chat_id)
+        # send_message(chat_id, {text})
+        
 
     return {"statusCode": 200, "body": "ok"}
