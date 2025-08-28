@@ -92,8 +92,8 @@ class Chat:
         if username not in self.in_chat_users:
             self.send_message(chat_id, "You are not in chat. Use /chat to join the chat.")
             return
-
-        for uname, (cid, icon) in self.in_chat_users.items():
+        chat_id, icon = self.in_chat_users.get(username)
+        for uname, (cid, icn) in self.in_chat_users.items():
             # if cid != chat_id:
             self.send_message(cid, text=f"@{username} {icon}:\n\n {text}")
     
