@@ -34,7 +34,7 @@ class Chat:
             payload["parse_mode"] = parse_mode
         requests.post(url, json=payload)
         
-    async def in_chat(self, chat_id, text) -> None:
+    def in_chat(self, chat_id, text) -> None:
         text = "Currently in chat:\n\n"
         for username, (cid, icon) in self.in_chat_users.items():
             text += f"@{username} {icon}\n"
@@ -50,7 +50,7 @@ class Chat:
         self.icons.remove(icon)
         return icon
 
-    async def chat(self, chat_id, username, text) -> None:
+    def chat(self, chat_id, username, text) -> None:
         icon = self.get_user_icon()
         self.in_chat_users[username] = (chat_id, icon)
         text = "You are in chat now! Currently in chat:\n\n"
@@ -63,7 +63,7 @@ class Chat:
         self.send_message(chat_id, text)
         return 0
 
-    # async def exit(self, update, context) -> int:
+    # def exit(self, update, context) -> int:
     #     """Exits and ends the conversation."""
     #     username = update.message.from_user.username
     #     chat_id = update.message.chat_id
