@@ -164,7 +164,7 @@ class Chat:
         url = f"{self.telegram_api_url}/sendVideoNote"
         # sendVideoNote uses the "video_note" field
         # Telegram's sendVideoNote doesn't support captions, so send a separate text announcement
-        announce = f"@{username}{icon}"
+        announce = f"@{username}{icon} sent a telebubble."
         if caption:
             announce += f": {caption}"
 
