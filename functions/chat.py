@@ -177,3 +177,23 @@ class Chat:
 
         return
 
+    def forward_video(self, chat_id, username, file_id, caption=None):
+        if username not in self.in_chat_users:
+            self.send_message(chat_id, "You are not in chat. Use /chat to join the chat.")
+            return
+
+        chat_id, icon = self.in_chat_users.get(username)
+
+        url = f"{self.telegram_api_url}/sendVideo"
+        data = {
+            "chat_id": chat_id,
+            "video": file_id
+        }
+        data["caption"] = f"@{username}{icon}"
+        if caption:
+            data["caption"] += f": {caption}"
+        for uname, (cid, icn) in self.in_chat_users.items():
+            # if cid != chat_id:
+                requests.post(url, json=data)
+
+        return
