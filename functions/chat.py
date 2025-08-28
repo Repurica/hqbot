@@ -123,7 +123,9 @@ class Chat:
             "chat_id": chat_id,
             "photo": file_id
         }
-        data["caption"] = f"{username}{icon} {caption}"
+        data["caption"] = f"@{username}{icon}"
+        if caption:
+            data["caption"] += f": {caption}"
         response = requests.post(url, json=data)
         
         return response
