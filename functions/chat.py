@@ -150,5 +150,6 @@ class Chat:
             data["caption"] += f": {caption}"
         for uname, (cid, icn) in self.in_chat_users.items():
             # if cid != chat_id:
+                self.send_message(cid, text=f"@{username}{icon} sent a sticker.")
                 requests.post(url, json=data)
         return 
