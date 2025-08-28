@@ -29,22 +29,27 @@ def lambda_handler(event, context):
     message = update.get("message", {})
     chat_id = message.get("chat", {}).get("id")
     username = message.get("from", {}).get("username")
-    text = message.get("text", "")
     virtual_chat.send_message(chat_id, message)
 
     if not chat_id:
         return {"statusCode": 200, "body": "No chat_id"}
 
-    if text.startswith("/start"):
-        virtual_chat.start(chat_id)
-    elif text.startswith("/chat"):
-        virtual_chat.chat(chat_id, username, text)
-    elif text.startswith("/in_chat"):
-        virtual_chat.in_chat(chat_id, text)
-    elif text.startswith("/exit"):
-        virtual_chat.exit(chat_id, text)
-    
-    else:
-        virtual_chat.normal_message(chat_id, username, text)
+    if 'text' in message:
 
+        text = message.get("text", "")
+
+        if text.startswith("/start"):
+            virtual_chat.start(chat_id)
+        elif text.startswith("/chat"):
+            virtual_chat.chat(chat_id, username, text)
+        elif text.startswith("/in_chat"):
+            virtual_chat.in_chat(chat_id, text)
+        elif text.startswith("/exit"):
+            virtual_chat.exit(chat_id, text)
+    
+        else:
+            virtual_chat.normal_message(chat_id, username, text)
+    elif 'photo' in message:
+        file_id = message['photo'][-1]['file_id']
+        virtual_chat.forward_photo(chat_id, file_id)
     return {"statusCode": 200, "body": "ok"}

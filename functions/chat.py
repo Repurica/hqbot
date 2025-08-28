@@ -106,3 +106,18 @@ class Chat:
             "/exit - exit chat group",
             parse_mode="HTML"
         )
+
+
+    def forward_photo(self, chat_id, file_id, caption=None):
+        
+        url = f"{self.telegram_api_url}/sendPhoto"
+        data = {
+            "chat_id": chat_id,
+            "photo": file_id
+        }
+        if caption:
+            data["caption"] = f"Forwarded photo: {caption}"
+        
+        response = requests.post(url, json=data)
+        
+        return response
