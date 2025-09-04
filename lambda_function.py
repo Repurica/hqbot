@@ -13,9 +13,9 @@ TELEGRAM_API_URL = f"https://api.telegram.org/bot{bot_token}"
 
 
 def load_chat_list(chat):
-    if os.path.exists("chat_list.json"):
-        with open("chat_list.json", "r") as f:
-            chat.in_chat_users = json.load(f)
+    
+    with open("chat_list.json", "r") as f:
+        chat.in_chat_users = json.load(f)
             
 
 virtual_chat = chat.Chat(TELEGRAM_API_URL)
