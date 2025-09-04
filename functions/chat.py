@@ -1,10 +1,12 @@
 import requests
 import random
+import json
 class Chat:
     def __init__(self,telegram_api_url):
         self.messages = []
         self.telegram_api_url = telegram_api_url
         self.in_chat_users = {}
+        self.load_user = False
         self.icons = [
             "🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯", "🦁", "🐮", "🐷", "🐸", "🐵", "🐔", "🐧", "🐦", "🐤", "🦆",
             "🦅", "🦉", "🦇", "🐺", "🐗", "🐴", "🦄", "🐝", "🐛", "🦋", "🐌", "🐞", "🐜", "🦟", "🦗", "🕷️", "🦂", "🐢", "🐍", "🦎",
@@ -62,6 +64,9 @@ class Chat:
         self.in_chat_users[username] = (chat_id, icon)
         text = "You are in chat now! Currently in chat:\n\n"
 
+        with open("../data/chat_list.json", "w") as f:
+            json.dump(self.in_chat_users, f, indent=4)
+
         for uname, (cid, icn) in self.in_chat_users.items():
             text += f"@{uname} {icn}\n"
             if cid != chat_id:
@@ -81,7 +86,10 @@ class Chat:
 
         self.icons.append(self.in_chat_users[username][1])
         del self.in_chat_users[username]
-
+        
+        with open("../data/chat_list.json", "w") as f:
+            json.dump(self.in_chat_users, f, indent=4)
+        
         for uname, (cid, icon) in self.in_chat_users.items():
             if cid != chat_id:
                 text = f"@{username} {icon} exited the chat."
