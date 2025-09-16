@@ -21,7 +21,7 @@ def load_chat_list(chat):
 virtual_chat = chat.Chat(TELEGRAM_API_URL)
 
 
-
+# // load this
 def lambda_handler(event, context):
     body = event.get("body")
     if body is None:

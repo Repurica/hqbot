@@ -38,7 +38,8 @@ class Chat:
         
 
         
-        
+    # shows whoever in the chat and sends data
+    # chat id is the person wwho requested
     def in_chat(self, chat_id) -> None:
         text = "Currently in chat:\n\n"
         for username, (cid, icon) in self.in_chat_users.items():
