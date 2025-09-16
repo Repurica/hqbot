@@ -11,7 +11,7 @@ bot_token = os.environ.get("BOT_TOKEN")
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{bot_token}"
 
 
-
+# load chat list from json
 def load_chat_list(chat):
     
     with open("chat_list.json", "r") as f:
