@@ -110,6 +110,7 @@ class Chat:
     def start(self, chat_id):
         self.send_message(
             chat_id,
+            "TESTING"
             "Welcome to smuhq bot! This bot is designed to better facilitate HQ!\n\n"
             "Available Commands:\n\n"
             "<strong>chat</strong>\n"
